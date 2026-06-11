@@ -1,0 +1,24 @@
+
+    <!--
+        FEATURED PRODUCT CARD — item_product_featured.xml
+        Used in the "Featured Picks" RecyclerView on the Home screen.
+        Horizontal row: image square | text stack | tag + chevron
+     -->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/cardFeatured" android:layout_width="match_parent" android:layout_height="90dp" android:layout_marginBottom="12dp" app:cardBackgroundColor="@color/light_gray" app:cardCornerRadius="4dp" app:cardElevation="0dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="horizontal">
+        <!--  Product image square  -->
+        <ImageView android:id="@+id/ivFeaturedImage" android:layout_width="90dp" android:layout_height="match_parent" android:background="@color/black" android:scaleType="centerInside" android:padding="8dp" android:contentDescription="Product image"/>
+        <!--  Text stack  -->
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:justifyContent="center" android:padding="12dp" android:gravity="center_vertical">
+            <TextView android:id="@+id/tvFeaturedCategory" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Shirts" android:textSize="10sp" android:textColor="@color/gold" android:textStyle="bold" android:textAllCaps="true" android:letterSpacing="0.1"/>
+            <TextView android:id="@+id/tvFeaturedName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Oversized Blazer" android:textSize="14sp" android:textColor="@color/black" android:textStyle="bold" android:layout_marginTop="2dp"/>
+            <TextView android:id="@+id/tvFeaturedPrice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="KSh 7,200" android:textSize="13sp" android:textColor="@color/dark_gray" android:textStyle="bold" android:layout_marginTop="4dp"/>
+        </LinearLayout>
+        <!--  Right side: tag + chevron  -->
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent" android:orientation="vertical" android:gravity="top|end" android:padding="10dp">
+            <TextView android:id="@+id/tvFeaturedTag" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="FEATURED" android:textSize="8sp" android:textColor="@color/gold" android:textStyle="bold" android:letterSpacing="0.1" android:background="@color/black" android:paddingStart="6dp" android:paddingEnd="6dp" android:paddingTop="3dp" android:paddingBottom="3dp"/>
+            <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="›" android:textSize="22sp" android:textColor="@color/dark_gray"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

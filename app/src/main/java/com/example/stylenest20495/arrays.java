@@ -1,0 +1,45 @@
+
+<!
+ARRAYS — arrays.xml
+String arrays used by Spinner adapters in the app.
+Place in res/values/
+        -->
+<resources>
+<!--  Sizes for the filter Spinner in CategoriesFragment  -->
+<string-array name="size_filter_options">
+        <item>All Sizes</item>
+<item>XS</item>
+<item>S</item>
+<item>M</item>
+<item>L</item>
+<item>XL</item>
+<item>37</item>
+<item>38</item>
+<item>39</item>
+<item>40</item>
+<item>41</item>
+<item>42</item>
+<item>One Size</item>
+</string-array>
+<!--  Sort options for the sort Spinner in CategoriesFragment  -->
+<string-array name="sort_options">
+        <item>Default</item>
+        <item>Price: Low → High</item>
+<item>Price: High → Low</item>
+</string-array>
+<!--  Payment methods for the Spinner in CartFragment  -->
+<string-array name="payment_methods">
+        <item>M-Pesa</item>
+        <item>Credit / Debit Card</item>
+<item>Cash on Delivery</item>
+</string-array>
+<!--  Product categories for ChipGroup / filter chips  -->
+<string-array name="product_categories">
+        <item>All</item>
+        <item>Shirts</item>
+        <item>Trousers</item>
+        <item>Dresses</item>
+        <item>Shoes</item>
+        <item>Accessories</item>
+        </string-array>
+        </resources>

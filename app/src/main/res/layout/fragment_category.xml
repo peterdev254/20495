@@ -1,0 +1,54 @@
+
+    <!
+        CATEGORIES / PRODUCT LIST — fragment_categories.xml
+        Structure:
+          • "Browse" heading
+          • HorizontalScrollView of category filter chips
+          • Filter row: size Spinner + sort Spinner + result count TextView
+          • RecyclerView (GridLayoutManager span 2) for products
+     -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="@color/white">
+    <!--  ══ Header ══  -->
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Browse" android:textSize="20sp" android:textStyle="bold" android:textColor="@color/black" android:letterSpacing="0.05" android:layout_marginStart="16dp" android:layout_marginTop="16dp" android:layout_marginBottom="4dp"/>
+    <!--  ══ Category Filter Chips ══  -->
+    <HorizontalScrollView android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="8dp" android:paddingBottom="4dp" android:scrollbars="none" android:clipToPadding="false">
+        <com.google.android.material.chip.ChipGroup android:id="@+id/chipGroupCategories" android:layout_width="wrap_content" android:layout_height="wrap_content" app:singleSelection="true" app:selectionRequired="true">
+            <!--
+                            Chips are inflated programmatically in CategoriesFragment:
+                                val chip = Chip(context)
+                                chip.text = category
+                                chip.isCheckable = true
+                                chipGroupCategories.addView(chip)
+
+                            OR define them statically:
+                         -->
+            <com.google.android.material.chip.Chip android:id="@+id/chipAll" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="All" android:checked="true" style="@style/Widget.Material3.Chip.Filter"/>
+            <com.google.android.material.chip.Chip android:id="@+id/chipShirts" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Shirts" style="@style/Widget.Material3.Chip.Filter"/>
+            <com.google.android.material.chip.Chip android:id="@+id/chipTrousers" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Trousers" style="@style/Widget.Material3.Chip.Filter"/>
+            <com.google.android.material.chip.Chip android:id="@+id/chipDresses" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dresses" style="@style/Widget.Material3.Chip.Filter"/>
+            <com.google.android.material.chip.Chip android:id="@+id/chipShoes" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Shoes" style="@style/Widget.Material3.Chip.Filter"/>
+            <com.google.android.material.chip.Chip android:id="@+id/chipAccessories" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Accessories" style="@style/Widget.Material3.Chip.Filter"/>
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+    <!--  ══ Filter Row (Size + Sort + Count) ══  -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="8dp" android:paddingBottom="4dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Filter:" android:textSize="11sp" android:textColor="@color/mid_gray" android:textAllCaps="true" android:letterSpacing="0.1" android:layout_marginEnd="8dp"/>
+        <!--  Size filter  -->
+        <Spinner android:id="@+id/spinnerSize" android:layout_width="wrap_content" android:layout_height="36dp" android:layout_marginEnd="8dp" android:background="@drawable/spinner_background"/>
+        <!--  Sort  -->
+        <Spinner android:id="@+id/spinnerSort" android:layout_width="wrap_content" android:layout_height="36dp" android:background="@drawable/spinner_background"/>
+        <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1"/>
+        <TextView android:id="@+id/tvResultCount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="8 items" android:textSize="11sp" android:textColor="@color/mid_gray"/>
+    </LinearLayout>
+    <!--  ══ Product Grid ══  -->
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvProducts" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:paddingStart="11dp" android:paddingEnd="11dp" android:paddingBottom="16dp" android:clipToPadding="false"/>
+    <!--
+                In CategoriesFragment:
+                    rvProducts.layoutManager = GridLayoutManager(context, 2)
+                    rvProducts.adapter = ProductGridAdapter(products) { product ->
+                        findNavController().navigate(
+                            CategoriesFragmentDirections.actionToProductDetail(product.id)
+                        )
+                    }
+             -->
+</LinearLayout>

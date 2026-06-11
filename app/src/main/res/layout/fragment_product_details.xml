@@ -1,0 +1,57 @@
+
+    <!
+        PRODUCT DETAIL — fragment_product_detail.xml
+        Scrollable detail view for a single product.
+        Structure:
+          • Large image hero (black bg) with tag badge + wishlist button
+          • Category label, Product name, Price
+          • Description
+          • Size selector (RecyclerView horizontal OR ChipGroup)
+          • "Add to Cart" primary button
+          • "Add to Wishlist" secondary button
+          • Shipping info card (3 bullet rows)
+     -->
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/white">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+        <!--  ══ Back button ══  -->
+        <Button android:id="@+id/btnBack" android:layout_width="wrap_content" android:layout_height="44dp" android:text="← Back" android:textSize="13sp" android:textColor="@color/dark_gray" android:textStyle="bold" android:background="?attr/selectableItemBackground" android:layout_marginStart="8dp" android:layout_marginTop="4dp" style="@style/Widget.AppCompat.Button.Borderless"/>
+        <!--  ══ Hero Image ══  -->
+        <FrameLayout android:layout_width="match_parent" android:layout_height="240dp">
+            <ImageView android:id="@+id/ivProductDetail" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/black" android:scaleType="centerInside" android:padding="20dp" android:contentDescription="Product detail image"/>
+            <!--  Tag badge — top-left  -->
+            <TextView android:id="@+id/tvDetailTag" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="top|start" android:layout_margin="14dp" android:text="NEW" android:textSize="9sp" android:textStyle="bold" android:textColor="@color/black" android:letterSpacing="0.1" android:background="@color/gold" android:paddingStart="8dp" android:paddingEnd="8dp" android:paddingTop="4dp" android:paddingBottom="4dp" android:visibility="gone"/>
+            <!--  Wishlist button — top-right  -->
+            <ImageButton android:id="@+id/ibDetailWishlist" android:layout_width="40dp" android:layout_height="40dp" android:layout_gravity="top|end" android:layout_margin="10dp" android:background="?attr/selectableItemBackgroundBorderless" android:src="@drawable/ic_heart_outline" android:tint="@color/white" android:contentDescription="Add to wishlist"/>
+        </FrameLayout>
+        <!--  ══ Product Info ══  -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingStart="20dp" android:paddingEnd="20dp" android:paddingTop="20dp">
+            <TextView android:id="@+id/tvDetailCategory" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CATEGORY" android:textSize="10sp" android:textColor="@color/gold" android:textStyle="bold" android:textAllCaps="true" android:letterSpacing="0.2"/>
+            <TextView android:id="@+id/tvDetailName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Product Name" android:textSize="22sp" android:textStyle="bold" android:textColor="@color/black" android:layout_marginTop="4dp"/>
+            <TextView android:id="@+id/tvDetailPrice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="KSh 0" android:textSize="20sp" android:textStyle="bold" android:textColor="@color/black" android:layout_marginTop="8dp"/>
+            <TextView android:id="@+id/tvDetailDescription" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Product description goes here." android:textSize="13sp" android:textColor="@color/dark_gray" android:lineSpacingMultiplier="1.6" android:layout_marginTop="12dp"/>
+            <!--  ══ Size Selector ══  -->
+            <TextView android:id="@+id/tvSizeLabel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Select Size" android:textSize="11sp" android:textColor="@color/mid_gray" android:textStyle="bold" android:textAllCaps="true" android:letterSpacing="0.1" android:layout_marginTop="20dp" android:layout_marginBottom="10dp"/>
+            <com.google.android.material.chip.ChipGroup android:id="@+id/chipGroupSizes" android:layout_width="match_parent" android:layout_height="wrap_content" app:singleSelection="true" app:selectionRequired="false">
+                <!--
+                                    Chips are inflated programmatically:
+                                        product.sizes.forEach { size ->
+                                            val chip = Chip(context)
+                                            chip.text = size
+                                            chip.isCheckable = true
+                                            chipGroupSizes.addView(chip)
+                                        }
+                                 -->
+            </com.google.android.material.chip.ChipGroup>
+            <!--  ══ Add to Cart ══  -->
+            <Button android:id="@+id/btnAddToCart" android:layout_width="match_parent" android:layout_height="52dp" android:text="SELECT A SIZE" android:textSize="13sp" android:textStyle="bold" android:letterSpacing="0.15" android:backgroundTint="@color/dark_gray" android:textColor="@color/white" android:layout_marginTop="24dp" android:enabled="false"/>
+            <!--  ══ Wishlist secondary ══  -->
+            <com.google.android.material.button.MaterialButton android:id="@+id/btnAddToWishlist" android:layout_width="match_parent" android:layout_height="46dp" android:text="🤍 Add to Wishlist" android:textSize="12sp" android:textColor="@color/dark_gray" android:layout_marginTop="10dp" style="@style/Widget.Material3.Button.OutlinedButton" app:strokeColor="@color/border_gray"/>
+            <!--  ══ Shipping Info ══  -->
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@color/light_gray" android:padding="14dp" android:layout_marginTop="16dp" android:layout_marginBottom="28dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="📦 Free delivery over KSh 5,000" android:textSize="11sp" android:textColor="@color/dark_gray" android:textStyle="bold" android:paddingBottom="6dp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="↩️ 14-day free returns" android:textSize="11sp" android:textColor="@color/dark_gray" android:textStyle="bold" android:paddingBottom="6dp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✅ Authentic & quality-checked" android:textSize="11sp" android:textColor="@color/dark_gray" android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
