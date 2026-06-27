@@ -1,10 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    PROMO BANNER ITEM — item_promo_banner.xml
+    Designed as a stylish card for the Home screen.
+    Includes space for a background image, promo text, and a call-to-action button.
+ -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    app:strokeWidth="0dp"
+    tools:context=".item_promo_banner">
 
-    <!--
-        PROMO BANNER ITEM — item_promo_banner.xml
-        Single page inside the ViewPager2 on the Home screen.
-        Background colour is set dynamically in PromoBannerAdapter.
-     -->
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="120dp" android:paddingStart="20dp" android:paddingEnd="20dp" android:background="@color/black">
-    <TextView android:id="@+id/tvPromoTitle" android:layout_width="0dp" android:layout_height="wrap_content" android:text="Summer Drop" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/gold" android:letterSpacing="0.05" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@+id/tvPromoSub" app:layout_constraintVertical_chainStyle="packed" android:layout_marginTop="24dp"/>
-    <TextView android:id="@+id/tvPromoSub" android:layout_width="0dp" android:layout_height="wrap_content" android:text="New arrivals — up to 30% off" android:textSize="12sp" android:textColor="@color/gold" android:alpha="0.8" android:layout_marginTop="4dp" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/tvPromoTitle" app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="24dp"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <!-- Background Image Placeholder -->
+        <ImageView
+            android:id="@+id/ivPromoBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.4"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background"
+            android:contentDescription="@string/section_featured"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvPromoTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.05"
+                android:text="Summer Drop"
+                android:textColor="@color/gold"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvPromoSub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="New arrivals — up to 30% off"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btnPromoAction"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/gold"
+                android:letterSpacing="0.1"
+                android:minHeight="36dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="SHOP NOW"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

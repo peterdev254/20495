@@ -1,29 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    MAIN ACTIVITY — activity_main.xml
+    Host layout that contains:
+      • A top toolbar with the brand logo and cart icon
+      • A NavHostFragment that swaps fragments (Home, Categories, Cart, Profile)
+      • A BottomNavigationView with 4 tabs
+ -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-    <!
-        MAIN ACTIVITY — activity_main.xml
-        Host layout that contains:
-          • A top toolbar with the brand logo and cart icon
-          • A NavHostFragment that swaps fragments (Home, Categories, Cart, Profile)
-          • A BottomNavigationView with 4 tabs
-
-        Usage in MainActivity.java / MainActivity.kt:
-            NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
-            NavigationUI.setupWithNavController(bottomNav, navController);
-     -->
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/white">
     <!--  ═══════════════════════ TOP TOOLBAR ═══════════════════════  -->
-    <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar" android:layout_width="0dp" android:layout_height="56dp" android:background="@color/black" android:paddingStart="16dp" android:paddingEnd="16dp" app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:background="@color/black"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <!--  Brand logo text (left)  -->
-        <TextView android:id="@+id/tvToolbarLogo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="✦ STYLENEST" android:textColor="@color/gold" android:textSize="17sp" android:textStyle="bold" android:letterSpacing="0.2" android:layout_gravity="start|center_vertical"/>
+        <TextView
+            android:id="@+id/tvToolbarLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:letterSpacing="0.2"
+            android:text="@string/toolbar_logo"
+            android:textColor="@color/gold"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
         <!--  Cart icon with badge (right)  -->
-        <FrameLayout android:id="@+id/cartIconContainer" android:layout_width="40dp" android:layout_height="40dp" android:layout_gravity="end|center_vertical">
-            <ImageView android:id="@+id/ivCartIcon" android:layout_width="24dp" android:layout_height="24dp" android:layout_gravity="center" android:src="@drawable/ic_shopping_bag" android:tint="@color/white" android:contentDescription="Cart"/>
+        <FrameLayout
+            android:id="@+id/cartIconContainer"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end|center_vertical">
+
+            <ImageView
+                android:id="@+id/ivCartIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/cd_cart_icon"
+                android:src="@drawable/ic_shopping_bag"
+                app:tint="@color/white" />
+
             <!--  Cart badge  -->
-            <TextView android:id="@+id/tvCartBadge" android:layout_width="16dp" android:layout_height="16dp" android:layout_gravity="top|end" android:background="@drawable/badge_background" android:text="0" android:textColor="@color/black" android:textSize="8sp" android:textStyle="bold" android:gravity="center" android:visibility="gone"/>
+            <TextView
+                android:id="@+id/tvCartBadge"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="top|end"
+                android:background="@drawable/badge_background"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:visibility="visible" />
         </FrameLayout>
     </androidx.appcompat.widget.Toolbar>
+
     <!--  ═══════════════════════ FRAGMENT CONTAINER ════════════════  -->
-    <androidx.fragment.app.FragmentContainerView android:id="@+id/navHostFragment" android:name="androidx.navigation.fragment.NavHostFragment" android:layout_width="0dp" android:layout_height="0dp" app:defaultNavHost="true" app:navGraph="@navigation/nav_graph" app:layout_constraintTop_toBottomOf="@+id/toolbar" app:layout_constraintBottom_toTopOf="@+id/bottomNav" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/navHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:navGraph="@navigation/nav_graph" />
+
     <!--  ═══════════════════════ BOTTOM NAVIGATION ════════════════  -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView android:id="@+id/bottomNav" android:layout_width="0dp" android:layout_height="56dp" android:background="@color/black" app:menu="@menu/bottom_nav_menu" app:itemIconTint="@drawable/bottom_nav_item_color" app:itemTextColor="@drawable/bottom_nav_item_color" app:itemTextAppearanceActive="@style/BottomNavTextActive" app:labelVisibilityMode="labeled" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:background="@color/black"
+        app:itemIconTint="@drawable/bottom_nav_item_color"
+        app:itemTextAppearanceActive="@style/BottomNavTextActive"
+        app:itemTextColor="@drawable/bottom_nav_item_color"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

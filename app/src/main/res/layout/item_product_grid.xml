@@ -1,26 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    GRID PRODUCT CARD - item_product_grid.xml
+    Used in the "New Arrivals" (Home) and "Browse" (Categories) grids.
+ -->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardProduct"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="@color/light_gray"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="0dp">
 
-    <!--
-        GRID PRODUCT CARD — item_product_grid.xml
-        Used in the "New Arrivals" (Home) and "Browse" (Categories) grids.
-        GridLayoutManager with spanCount = 2.
-        The tag badge and wishlist heart are overlaid on the image.
-     --!>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/cardProduct" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="5dp" app:cardBackgroundColor="@color/light_gray" app:cardCornerRadius="4dp" app:cardElevation="0dp">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
-        <!--  Image area with overlaid badges  -->
-        <FrameLayout android:layout_width="match_parent" android:layout_height="140dp">
-            <!--  Product image / placeholder  -->
-            <ImageView android:id="@+id/ivProductImage" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/black" android:scaleType="centerInside" android:padding="12dp" android:contentDescription="Product image"/>
-            <!--  Tag badge (NEW / SALE / FEATURED) — top-left  -->
-            <TextView android:id="@+id/tvProductTag" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="top|start" android:layout_margin="8dp" android:text="NEW" android:textSize="8sp" android:textStyle="bold" android:textColor="@color/black" android:letterSpacing="0.1" android:background="@color/gold" android:paddingStart="6dp" android:paddingEnd="6dp" android:paddingTop="3dp" android:paddingBottom="3dp" android:visibility="gone"/>
-            <!--  Wishlist toggle — top-right  -->
-            <ImageButton android:id="@+id/ibWishlist" android:layout_width="32dp" android:layout_height="32dp" android:layout_gravity="top|end" android:layout_margin="6dp" android:background="?attr/selectableItemBackgroundBorderless" android:src="@drawable/ic_heart_outline" android:tint="@color/white" android:contentDescription="Add to wishlist"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Image area with overlaid badges -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp">
+
+            <ImageView
+                android:id="@+id/ivProductImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black"
+                android:contentDescription="Product image"
+                android:padding="12dp"
+                android:scaleType="centerInside" />
+
+            <TextView
+                android:id="@+id/tvProductTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:layout_margin="8dp"
+                android:background="@color/gold"
+                android:letterSpacing="0.1"
+                android:paddingStart="6dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="6dp"
+                android:paddingBottom="3dp"
+                android:text="@string/tag_new"
+                android:textColor="@color/black"
+                android:textSize="8sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <ImageButton
+                android:id="@+id/ibWishlist"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="top|end"
+                android:layout_margin="6dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Add to wishlist"
+                android:src="@drawable/ic_heart_outline"
+                app:tint="@color/white" />
         </FrameLayout>
-        <!--  Product info  -->
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="10dp">
-            <TextView android:id="@+id/tvProductCategory" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Category" android:textSize="9sp" android:textColor="@color/mid_gray" android:textAllCaps="true" android:letterSpacing="0.1"/>
-            <TextView android:id="@+id/tvProductName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Product Name" android:textSize="12sp" android:textColor="@color/black" android:textStyle="bold" android:maxLines="2" android:ellipsize="end" android:layout_marginTop="2dp"/>
-            <TextView android:id="@+id/tvProductPrice" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="KSh 0" android:textSize="12sp" android:textColor="@color/dark_gray" android:textStyle="bold" android:layout_marginTop="4dp" android:layout_marginBottom="2dp"/>
+
+        <!-- Product info -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tvProductCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.1"
+                android:text="Category"
+                android:textAllCaps="true"
+                android:textColor="@color/mid_gray"
+                android:textSize="9sp" />
+
+            <TextView
+                android:id="@+id/tvProductName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="Product Name"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvProductPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="2dp"
+                android:text="KSh 0"
+                android:textColor="@color/dark_gray"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

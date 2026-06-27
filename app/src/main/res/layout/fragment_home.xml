@@ -1,38 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    HOME SCREEN - fragment_home.xml
+    Structure (top-to-bottom inside a NestedScrollView):
+      1. Promotional banner (ViewPager2 + TabLayout dots)
+      2. "Shop by Category" horizontal chip row (HorizontalScrollView)
+      3. "Featured Picks" RecyclerView (LinearLayoutManager, HORIZONTAL)
+      4. "New Arrivals" RecyclerView (GridLayoutManager, 2 columns)
+ -->
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fillViewport="true">
 
-    <!--
-        HOME SCREEN — fragment_home.xml
-        Structure (top-to-bottom inside a NestedScrollView):
-          1. Promotional banner (ViewPager2 + TabLayout dots)
-          2. "Shop by Category" horizontal chip row (HorizontalScrollView)
-          3. "Featured Picks" RecyclerView (LinearLayoutManager, HORIZONTAL)
-          4. "New Arrivals" RecyclerView (GridLayoutManager, 2 columns)
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        Adapter classes needed:
-            PromoBannerAdapter  (ViewPager2)
-            CategoryChipAdapter (RecyclerView, horizontal)
-            ProductCardAdapter  (RecyclerView, used for both Featured and New Arrivals)
-     -->
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/white" android:fillViewport="true">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
-        <!--  ══════════════ 1. PROMO BANNER ══════════════  -->
-        <androidx.viewpager2.widget.ViewPager2 android:id="@+id/vpPromoBanner" android:layout_width="match_parent" android:layout_height="120dp"/>
+        <!--  == 1. PROMO BANNER ==  -->
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vpPromoBanner"
+            android:layout_width="match_parent"
+            android:layout_height="120dp" />
+
         <!--  Dot indicators  -->
-        <com.google.android.material.tabs.TabLayout android:id="@+id/tabPromoDots" android:layout_width="match_parent" android:layout_height="24dp" android:background="@color/black" app:tabBackground="@drawable/tab_dot_selector" app:tabGravity="center" app:tabIndicatorHeight="0dp" app:tabMinWidth="6dp" app:tabMaxWidth="20dp" app:tabPaddingStart="3dp" app:tabPaddingEnd="3dp"/>
-        <!--  ══════════════ 2. CATEGORY CHIPS ══════════════  -->
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Shop by Category" android:textSize="11sp" android:textColor="@color/mid_gray" android:textAllCaps="true" android:letterSpacing="0.15" android:layout_marginStart="16dp" android:layout_marginTop="20dp" android:layout_marginBottom="10dp"/>
-        <HorizontalScrollView android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="16dp" android:paddingEnd="16dp" android:scrollbars="none" android:clipToPadding="false">
-            <LinearLayout android:id="@+id/llCategoryChips" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
-                <!--  Chips are added programmatically in HomeFragment,
-                                     OR replace this LinearLayout with a RecyclerView:
-                                     android:id="@+id/rvCategoryChips"    -->
-            </LinearLayout>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabPromoDots"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:background="@color/black"
+            app:tabBackground="@drawable/tab_dot_selector"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp"
+            app:tabMaxWidth="20dp"
+            app:tabMinWidth="6dp"
+            app:tabPaddingEnd="3dp"
+            app:tabPaddingStart="3dp" />
+
+        <!--  == 2. CATEGORY CHIPS ==  -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:letterSpacing="0.15"
+            android:text="@string/section_shop_by_category"
+            android:textAllCaps="true"
+            android:textColor="@color/mid_gray"
+            android:textSize="11sp" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/llCategoryChips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" />
         </HorizontalScrollView>
-        <!--  ══════════════ 3. FEATURED PICKS ══════════════  -->
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Featured Picks" android:textSize="11sp" android:textColor="@color/mid_gray" android:textAllCaps="true" android:letterSpacing="0.15" android:layout_marginStart="16dp" android:layout_marginTop="20dp" android:layout_marginBottom="10dp"/>
-        <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvFeatured" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="16dp" android:paddingEnd="16dp" android:clipToPadding="false" android:orientation="vertical" android:nestedScrollingEnabled="false" app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-        <!--  ══════════════ 4. NEW ARRIVALS ══════════════  -->
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="New Arrivals" android:textSize="11sp" android:textColor="@color/mid_gray" android:textAllCaps="true" android:letterSpacing="0.15" android:layout_marginStart="16dp" android:layout_marginTop="20dp" android:layout_marginBottom="10dp"/>
-        <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvNewArrivals" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingBottom="24dp" android:clipToPadding="false" android:nestedScrollingEnabled="false"/>
-        <!--  GridLayoutManager(context, 2) set in HomeFragment.kt  -->
+
+        <!--  == 3. FEATURED PICKS ==  -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:letterSpacing="0.15"
+            android:text="@string/section_featured"
+            android:textAllCaps="true"
+            android:textColor="@color/mid_gray"
+            android:textSize="11sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFeatured"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="false"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <!--  == 4. NEW ARRIVALS ==  -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:letterSpacing="0.15"
+            android:text="@string/section_new_arrivals"
+            android:textAllCaps="true"
+            android:textColor="@color/mid_gray"
+            android:textSize="11sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvNewArrivals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:nestedScrollingEnabled="false"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="24dp" />
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

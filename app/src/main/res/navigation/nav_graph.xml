@@ -3,26 +3,78 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.stylenest20495.home"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_productDetail"
+            app:destination="@id/product_detail" />
+    </fragment>
 
     <fragment
         android:id="@+id/FirstFragment"
         android:name="com.example.stylenest20495.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
-
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.stylenest20495.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
-
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_categories"
+        android:name="com.example.stylenest20495.categories"
+        android:label="@string/screen_browse"
+        tools:layout="@layout/fragment_category">
+        <action
+            android:id="@+id/action_categories_to_productDetail"
+            app:destination="@id/product_detail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_cart"
+        android:name="com.example.stylenest20495.cart"
+        android:label="@string/screen_cart"
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cart_to_orderConfirmation"
+            app:destination="@id/order_confirmation" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.stylenest20495.profile"
+        android:label="@string/screen_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/product_detail"
+        android:name="com.example.stylenest20495.productdetail"
+        android:label="Product Detail"
+        tools:layout="@layout/fragment_product_detail_item">
+        <argument
+            android:name="productId"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/order_confirmation"
+        android:name="com.example.stylenest20495.order_confirmation"
+        android:label="Order Confirmed"
+        tools:layout="@layout/fragment_order_confirmation" />
+
 </navigation>

@@ -59,6 +59,6 @@ public class productdetail extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_productdetail, container, false);
+        return inflater.inflate(R.layout.fragment_product_detail_item, container, false);
     }
 }

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+    CART ITEM — item_cart.xml
+    Individual row for the RecyclerView in fragment_cart.xml.
+    Shows product image, details, price, and quantity controls.
+ -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/border_gray"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- Product Image -->
+        <ImageView
+            android:id="@+id/ivCartProduct"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:background="@color/light_gray"
+            android:contentDescription="@string/cd_cart_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tvCartTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Premium Cotton Tee"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/ibRemove"
+            app:layout_constraintStart_toEndOf="@+id/ivCartProduct"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Details (Size/Color) -->
+        <TextView
+            android:id="@+id/tvCartVariant"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Size: L | Color: Onyx"
+            android:textColor="@color/mid_gray"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvCartTitle"
+            app:layout_constraintStart_toStartOf="@+id/tvCartTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvCartTitle" />
+
+        <!-- Price -->
+        <TextView
+            android:id="@+id/tvCartPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="KSh 2,500"
+            android:textColor="@color/dark_gray"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tvCartTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvCartVariant" />
+
+        <!-- Quantity Controls -->
+        <LinearLayout
+            android:id="@+id/llQuantityControls"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/light_gray"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvCartTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvCartPrice">
+
+            <TextView
+                android:id="@+id/btnDecrease"
+                android:layout_width="32dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="−"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground" />
+
+            <TextView
+                android:id="@+id/tvQuantity"
+                android:layout_width="32dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btnIncrease"
+                android:layout_width="32dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground" />
+        </LinearLayout>
+
+        <!-- Remove Item Button -->
+        <ImageButton
+            android:id="@+id/ibRemove"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/mid_gray"
+            android:contentDescription="@string/back_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

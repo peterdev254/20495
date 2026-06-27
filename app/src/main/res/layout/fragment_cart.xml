@@ -1,73 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    CART — fragment_cart.xml
+    Two states handled in CartFragment:
+      • EMPTY  — show emptyStateGroup, hide cartGroup
+      • HAS ITEMS — hide emptyStateGroup, show cartGroup
 
-    <!--
-        CART — fragment_cart.xml
-        Two states handled in CartFragment:
-          • EMPTY  — show emptyStateGroup, hide cartGroup
-          • HAS ITEMS — hide emptyStateGroup, show cartGroup
+    cartGroup contains:
+      • RecyclerView of cart items
+      • Order summary card (subtotal, delivery, total)
+      • Checkout / Place Order button at bottom (sticky)
+ -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-        cartGroup contains:
-          • RecyclerView of cart items
-          • Order summary card (subtotal, delivery, total)
-          • Checkout / Place Order button at bottom (sticky)
-     -->
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/white">
     <!--  ══ HEADING ══  -->
-    <TextView android:id="@+id/tvCartHeading" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Cart" android:textSize="20sp" android:textStyle="bold" android:textColor="@color/black" android:layout_marginStart="16dp" android:layout_marginTop="16dp" app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"/>
-    <TextView android:id="@+id/tvCartCount" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(0)" android:textSize="14sp" android:textColor="@color/mid_gray" android:layout_marginStart="6dp" app:layout_constraintStart_toEndOf="@+id/tvCartHeading" app:layout_constraintBaseline_toBaselineOf="@+id/tvCartHeading"/>
+    <TextView
+        android:id="@+id/tvCartHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/screen_cart"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCartCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:text="(0)"
+        android:textColor="@color/mid_gray"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvCartHeading"
+        app:layout_constraintStart_toEndOf="@+id/tvCartHeading" />
+
     <!--  ══════════ EMPTY STATE ══════════  -->
-    <LinearLayout android:id="@+id/llEmptyCart" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center" android:padding="48dp" android:visibility="gone" app:layout_constraintTop_toBottomOf="@+id/tvCartHeading" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🛍️" android:textSize="48sp"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Your cart is empty" android:textSize="16sp" android:textStyle="bold" android:textColor="@color/dark_gray" android:layout_marginTop="12dp"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Browse our collections to find something you love." android:textSize="12sp" android:textColor="@color/mid_gray" android:gravity="center" android:layout_marginTop="6dp"/>
-        <Button android:id="@+id/btnBrowseNow" android:layout_width="wrap_content" android:layout_height="44dp" android:text="BROWSE NOW" android:textSize="12sp" android:textStyle="bold" android:letterSpacing="0.15" android:backgroundTint="@color/black" android:textColor="@color/white" android:layout_marginTop="20dp"/>
+    <LinearLayout
+        android:id="@+id/llEmptyCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="48dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCartHeading">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🛍️"
+            android:textSize="48sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/cart_empty_title"
+            android:textColor="@color/dark_gray"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:text="@string/cart_empty_subtitle"
+            android:textColor="@color/mid_gray"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btnBrowseNow"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/black"
+            android:letterSpacing="0.15"
+            android:text="@string/btn_browse_now"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
     </LinearLayout>
+
     <!--  ══════════ CART CONTENT ══════════  -->
     <!--  Scrollable portion: item list + summary  -->
-    <androidx.core.widget.NestedScrollView android:id="@+id/nsvCartContent" android:layout_width="0dp" android:layout_height="0dp" android:visibility="visible" app:layout_constraintTop_toBottomOf="@+id/tvCartHeading" app:layout_constraintBottom_toTopOf="@+id/btnPlaceOrder" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingTop="12dp">
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsvCartContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/btnPlaceOrder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCartHeading">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp">
+
             <!--  Cart items list  -->
-            <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvCartItems" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingStart="16dp" android:paddingEnd="16dp" android:nestedScrollingEnabled="false" app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCartItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
             <!--  ══ Order Summary Card ══  -->
-            <LinearLayout android:id="@+id/llOrderSummary" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@color/light_gray" android:padding="16dp" android:layout_marginStart="16dp" android:layout_marginEnd="16dp" android:layout_marginTop="12dp">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Order Summary" android:textSize="11sp" android:textStyle="bold" android:textColor="@color/mid_gray" android:textAllCaps="true" android:letterSpacing="0.1" android:layout_marginBottom="10dp"/>
+            <LinearLayout
+                android:id="@+id/llOrderSummary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/light_gray"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:letterSpacing="0.1"
+                    android:text="@string/label_order_summary"
+                    android:textAllCaps="true"
+                    android:textColor="@color/mid_gray"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
                 <!--  Subtotal row  -->
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="6dp">
-                    <TextView android:id="@+id/tvSubtotalLabel" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Subtotal (0 items)" android:textSize="12sp" android:textColor="@color/dark_gray"/>
-                    <TextView android:id="@+id/tvSubtotalValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="KSh 0" android:textSize="12sp" android:textColor="@color/dark_gray"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvSubtotalLabel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/label_subtotal"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvSubtotalValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="KSh 0"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="12sp" />
                 </LinearLayout>
+
                 <!--  Delivery row  -->
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginBottom="10dp">
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Delivery" android:textSize="12sp" android:textColor="@color/dark_gray"/>
-                    <TextView android:id="@+id/tvDeliveryValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="KSh 300" android:textSize="12sp" android:textColor="@color/dark_gray"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/label_delivery"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvDeliveryValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="KSh 300"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="12sp" />
                 </LinearLayout>
+
                 <!--  Divider  -->
-                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/border_gray" android:layout_marginBottom="10dp"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/border_gray" />
+
                 <!--  Total row  -->
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Total" android:textSize="15sp" android:textStyle="bold" android:textColor="@color/black"/>
-                    <TextView android:id="@+id/tvTotalValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="KSh 0" android:textSize="15sp" android:textStyle="bold" android:textColor="@color/black"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/label_total"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvTotalValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="KSh 0"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
+
             <!--  ══ Checkout / Delivery Form ══  -->
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@color/light_gray" android:padding="16dp" android:layout_marginStart="16dp" android:layout_marginEnd="16dp" android:layout_marginTop="12dp">
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Delivery Details" android:textSize="11sp" android:textStyle="bold" android:textColor="@color/mid_gray" android:textAllCaps="true" android:letterSpacing="0.1" android:layout_marginBottom="12dp"/>
-                <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Full Name" android:layout_marginBottom="10dp" style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                    <com.google.android.material.textfield.TextInputEditText android:id="@+id/etFullName" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textPersonName" android:textSize="13sp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/light_gray"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:letterSpacing="0.1"
+                    android:text="@string/label_delivery_details"
+                    android:textAllCaps="true"
+                    android:textColor="@color/mid_gray"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/hint_full_name">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etFullName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:textSize="13sp" />
                 </com.google.android.material.textfield.TextInputLayout>
-                <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Phone Number" android:layout_marginBottom="10dp" style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                    <com.google.android.material.textfield.TextInputEditText android:id="@+id/etPhone" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="phone" android:textSize="13sp"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/hint_phone">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:textSize="13sp" />
                 </com.google.android.material.textfield.TextInputLayout>
-                <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Delivery Address" android:layout_marginBottom="10dp" style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                    <com.google.android.material.textfield.TextInputEditText android:id="@+id/etAddress" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="textPostalAddress" android:textSize="13sp"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="@string/hint_address">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPostalAddress"
+                        android:textSize="13sp" />
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <!--  Payment method spinner  -->
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Payment Method" android:textSize="10sp" android:textColor="@color/mid_gray" android:textAllCaps="true" android:letterSpacing="0.1" android:layout_marginBottom="4dp"/>
-                <Spinner android:id="@+id/spinnerPayment" android:layout_width="match_parent" android:layout_height="44dp" android:background="@drawable/spinner_background" android:entries="@array/payment_methods" android:layout_marginBottom="4dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:letterSpacing="0.1"
+                    android:text="@string/label_payment_method"
+                    android:textAllCaps="true"
+                    android:textColor="@color/mid_gray"
+                    android:textSize="11sp" />
+
+                <Spinner
+                    android:id="@+id/spinnerPayment"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginBottom="4dp"
+                    android:entries="@array/payment_methods" />
             </LinearLayout>
+
             <!--  spacer before sticky button  -->
-            <View android:layout_width="match_parent" android:layout_height="16dp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
     <!--  ══ Sticky Place Order Button ══  -->
-    <Button android:id="@+id/btnPlaceOrder" android:layout_width="0dp" android:layout_height="52dp" android:text="PLACE ORDER" android:textSize="13sp" android:textStyle="bold" android:letterSpacing="0.15" android:backgroundTint="@color/black" android:textColor="@color/white" android:layout_marginStart="16dp" android:layout_marginEnd="16dp" android:layout_marginBottom="16dp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+    <Button
+        android:id="@+id/btnPlaceOrder"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/black"
+        android:letterSpacing="0.15"
+        android:text="@string/btn_place_order"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

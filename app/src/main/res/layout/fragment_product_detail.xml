@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    PRODUCT DETAIL - fragment_product_details.xml
+    PRODUCT DETAIL - fragment_product_detail.xml
     Scrollable detail view for a single product.
     Structure:
       - Large image hero (black bg) with tag badge + wishlist button

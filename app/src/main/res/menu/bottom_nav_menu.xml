@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    BOTTOM NAVIGATION MENU — bottom_nav_menu.xml
+    Defines the 4 main tabs of the StyleNest application.
+    Location: res/menu
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/first_fragment_label" />
+
+    <item
+        android:id="@+id/navigation_categories"
+        android:icon="@drawable/ic_grid"
+        android:title="@string/screen_browse" />
+
+    <item
+        android:id="@+id/navigation_cart"
+        android:icon="@drawable/ic_shopping_bag"
+        android:title="@string/screen_cart" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_person"
+        android:title="@string/screen_profile" />
+
+</menu>
