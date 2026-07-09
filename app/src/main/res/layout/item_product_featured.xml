@@ -13,9 +13,9 @@
             android:layout_height="match_parent"
             android:background="@color/black"
             android:contentDescription="Product image"
-            android:padding="8dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/img_shirt_placeholder" />
+            android:padding="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_blazer_real" />
         <!--  Text stack  -->
         <LinearLayout
             android:layout_width="0dp"

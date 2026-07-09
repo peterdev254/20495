@@ -24,7 +24,7 @@
             android:layout_width="80dp"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
-            android:background="@color/light_gray"
+            android:src="@drawable/img_shirt_real"
             android:contentDescription="@string/cd_cart_icon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

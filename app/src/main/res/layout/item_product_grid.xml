@@ -29,9 +29,9 @@
                 android:layout_height="match_parent"
                 android:background="@color/black"
                 android:contentDescription="Product image"
-                android:padding="12dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/img_trousers_placeholder" />
+                android:padding="0dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_shirt_real" />
 
             <TextView
                 android:id="@+id/tvProductTag"
