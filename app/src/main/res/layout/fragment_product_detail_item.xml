@@ -48,7 +48,8 @@
                 android:background="@color/black"
                 android:contentDescription="Product detail image"
                 android:padding="20dp"
-                android:scaleType="centerInside" />
+                android:scaleType="centerInside"
+                android:src="@drawable/img_shirt_placeholder" />
 
             <!--  Tag badge - top-left  -->
             <TextView
