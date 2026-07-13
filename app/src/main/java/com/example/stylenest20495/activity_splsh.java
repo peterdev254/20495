@@ -1,24 +1,23 @@
 package com.example.stylenest20495;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
+import android.os.Handler;
+import android.os.Looper;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class activity_splsh extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splsh);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        // Delay for 2 seconds then transition to MainActivity
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            Intent intent = new Intent(activity_splsh.this, activity_main.class);
+            startActivity(intent);
+            finish(); // Close splash
+        }, 2000);
     }
 }
